@@ -11,9 +11,9 @@ export default function Backlog({ tasks }) {
       <tbody>
         {tasks.map((task) => (
           <tr key={task.id}>
-            <td className="is-family-code	">{task.title}</td>
-            <td className="is-family-code	">{task.description}</td>
-            <td className="is-family-code	">{task.taskStatus?.name}</td>
+            <td className="is-family-code">{task.title}</td>
+            <td className="is-family-code">{task.description}</td>
+            <td className="is-family-code">{task.taskStatus?.name}</td>
           </tr>
         ))}
       </tbody>
