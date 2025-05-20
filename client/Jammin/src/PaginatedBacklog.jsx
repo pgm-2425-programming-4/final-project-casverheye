@@ -4,11 +4,17 @@ import Backlog from './Backlog'
 import Pagination from './Pagination'
 
 const PAGE_SIZE_OPTIONS = [1, 2, 5, 10];
+const TOKEN = import.meta.env.VITE_REACT_APP_STRAPI_TOKEN;
 
 function fetchTasks(page, pageSize) {
   return fetch(
-    `http://localhost:1337/api/tasks?populate=taskStatus&filters[taskStatus][name][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
-  ).then(res => res.json())
+    `http://localhost:1337/api/tasks?populate=taskStatus&filters[taskStatus][name][$eq]=Backlog&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  ).then(res => res.json());
 }
 
 export default function PaginatedBacklog() {
