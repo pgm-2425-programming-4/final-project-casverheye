@@ -1,4 +1,4 @@
-export default function Pagination({ currentPage, pageCount, onPageChanged, pageSize, onPageSizeChange, pageSizeOptions }) {
+const Pagination=({ currentPage, pageCount, onPageChanged, pageSize, onPageSizeChange, pageSizeOptions }) =>{
   let pageNumberArray;
 
   if (pageCount <= 6) {
@@ -77,7 +77,7 @@ export default function Pagination({ currentPage, pageCount, onPageChanged, page
           className="is-family-code"
           id="tasks-per-page"
           value={pageSize}
-          onChange={(e) => onPageSizeChange(Number(e.target.value))}
+          onChange={(e) => onPageSizeChange(parseInt(e.target.value, 10))}
         >
           {pageSizeOptions.map((opt) => (
             <option key={opt} value={opt}>
@@ -89,3 +89,5 @@ export default function Pagination({ currentPage, pageCount, onPageChanged, page
     </nav>
   );
 }
+
+export default Pagination

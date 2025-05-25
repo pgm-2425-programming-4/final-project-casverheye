@@ -1,4 +1,4 @@
-export default function Backlog({ tasks }) {
+const BacklogList = ({ tasks }) => {
   return (
     <table className="table is-fullwidth">
       <thead>
@@ -20,3 +20,5 @@ export default function Backlog({ tasks }) {
     </table>
   );
 }
+
+export default BacklogList
