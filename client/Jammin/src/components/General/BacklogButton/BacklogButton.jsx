@@ -1,8 +1,8 @@
 import styles from "./BacklogButton.module.css";
 
-export default function BacklogButton({ label, color = "#7808d0", onClick }) {
+export default function BacklogButton({ label}) {
   return (
-    <button className={styles.button} style={{ "--clr": color }} onClick={onClick}>
+    <button className={styles.button}>
       <span className={styles.button__icon_wrapper}>
         <svg
           viewBox="0 0 14 15"
