@@ -77,7 +77,7 @@ const Pagination=({ currentPage, pageCount, onPageChanged, pageSize, onPageSizeC
           className="is-family-code"
           id="tasks-per-page"
           value={pageSize}
-          onChange={(e) => onPageSizeChange(parseInt(e.target.value))}
+          onChange={(e) => onPageSizeChange(parseInt(e.target.value, 10))}
         >
           {pageSizeOptions.map((opt) => (
             <option key={opt} value={opt}>
