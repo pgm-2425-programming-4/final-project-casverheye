@@ -32,11 +32,11 @@
 }
 
 .button:hover {
-  background-color: #000;
+  background-color: rgb(92, 111, 255); 
 }
 
 .button:hover .button__icon_wrapper {
-  color: #000;
+  color: rgb(92, 111, 255); 
 }
 
 .button__icon_svg_copy {

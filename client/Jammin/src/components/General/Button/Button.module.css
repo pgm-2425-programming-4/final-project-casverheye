@@ -1,0 +1,28 @@
+.button {
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: rgb(66, 88, 255);
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.2s ease;
+  max-height: 2rem;
+}
+
+.button:hover {
+  background-color: #eb0024;
+}
+
+.success {
+  background-color: #009e6d;
+}
+
+.success:hover {
+  background-color: #148164;
+}

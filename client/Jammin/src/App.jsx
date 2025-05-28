@@ -1,5 +1,8 @@
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import PaginatedBacklog from './pages/PaginatedBacklog'
 import Header from './components/Elements/Header'
 
@@ -11,6 +14,7 @@ function App() {
       <main className="container">
         <Header />
         <PaginatedBacklog />
+        <ToastContainer position='top-center'/>
       </main>
     </QueryClientProvider>
   );
