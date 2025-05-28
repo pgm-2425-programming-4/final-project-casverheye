@@ -11,7 +11,7 @@ const createTask = async (task) => {
       },
       body: JSON.stringify({ data: task }),
     })
-    return response.json()
+    return await response.json()
   } catch (error) {
     console.error('Error posting tasks:', error)
   }
