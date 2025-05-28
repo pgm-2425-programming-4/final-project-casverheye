@@ -1,0 +1,29 @@
+.button {
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: #009e6d;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.2s ease;
+  max-height: 2rem;
+}
+
+.button:hover {
+  background-color: #148164;
+}
+
+.form input {
+  background-color: white;
+  color: black
+}
+
+.form label {
+  color: black;
+}

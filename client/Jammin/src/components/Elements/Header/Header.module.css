@@ -3,3 +3,7 @@
   justify-content: space-between;
   padding: 1rem 0;
 }
+
+.header a {
+  color: rgb(66, 88, 255);
+}
