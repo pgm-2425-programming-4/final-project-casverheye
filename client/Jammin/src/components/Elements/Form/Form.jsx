@@ -28,7 +28,7 @@ const Form = () => {
         taskStatus: "",
       });
       
-      queryClient.invalidateQueries({ queryKey: ["backlog"], exact: false });
+      queryClient.invalidateQueries({ queryKey: ["backlog"] });
 
       toast.success("Task added successfully!");
     },
