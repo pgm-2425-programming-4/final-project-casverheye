@@ -4,7 +4,7 @@ import Nav from "../Nav"
 const Header = () => {
   return (
     <header className={styles.header}>
-      <a href="/">Logo</a>
+      <a href="/" className="title">Logo?</a>
       <Nav/>
     </header>
   );
