@@ -1,8 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import styles from "./BacklogButton.module.css";
 
-export default function BacklogButton({ label}) {
+export default function BacklogButton({ label }) {
   return (
-    <button className={styles.button}>
+    <Link to="/backlog" className={styles.button}>
       <span className={styles.button__icon_wrapper}>
         <svg
           viewBox="0 0 14 15"
@@ -31,6 +32,6 @@ export default function BacklogButton({ label}) {
         </svg>
       </span>
       {label}
-    </button>
+    </Link>
   );
 }
