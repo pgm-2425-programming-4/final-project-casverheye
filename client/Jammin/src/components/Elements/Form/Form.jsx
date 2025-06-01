@@ -43,7 +43,12 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(task);
+    const payload = {
+      title: task.title,
+      description: task.description,
+      taskStatus: task.taskStatus,
+    };
+    mutate(payload);
   };
 
   return (
@@ -89,7 +94,6 @@ const Form = () => {
           </label>
           <div className={`select is-link ${styles.select}`}>
             <select
-              className=""
               id="taskStatus"
               name="taskStatus"
               value={task.taskStatus}
@@ -103,7 +107,7 @@ const Form = () => {
               {data &&
                 data.data &&
                 data.data.map((status) => (
-                  <option key={status.id} value={status.id}>
+                  <option key={status.id} value={status.documentId}>
                     {status.attributes?.name || status.name}
                   </option>
                 ))}

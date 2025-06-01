@@ -1,7 +1,10 @@
 import { API_TOKEN, API_URL } from '../constants/constants'
 
-const fetchTasks = async (page, pageSize) => {
-  const url = `${API_URL}/tasks?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=taskStatus`
+const fetchTasks = async (page, pageSize, projectId) => {
+  let url = `${API_URL}/tasks?pagination[page]=${page}&pagination[pageSize]=${pageSize}&populate=taskStatus`
+  if (projectId) {
+    url += `&filters[project][documentId][$eq]=${projectId}`
+  }
   try {
     const response = await fetch(url, {
       headers: {

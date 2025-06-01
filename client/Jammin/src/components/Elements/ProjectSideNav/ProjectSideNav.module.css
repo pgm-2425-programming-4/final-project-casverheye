@@ -1,0 +1,13 @@
+
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.active {
+  background-color: rgb(66, 88, 255);
+  color: white;
+}
