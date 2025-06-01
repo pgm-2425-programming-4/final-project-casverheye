@@ -1,0 +1,8 @@
+.flex {
+  display: flex;
+}
+
+.aside {
+  padding-right: 1rem;
+  border-right: 1px solid white;
+}
