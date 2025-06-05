@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import fetchProjects from "../../../api/fetchProjects";
 import createProject from "../../../api/createProject";
 import deleteProject from "../../../api/deleteProject";
@@ -68,15 +69,19 @@ const ProjectSideNav = ({ selectedProjectId, onSelect }) => {
       </form>
       <ul className={styles.ul}>
         {data?.data?.map((project) => (
-          <li
-            key={project.id} className={styles.li}
-          >
-            <button
+          <li key={project.id} className={styles.li}>
+            <Link
+              to={`/projects/${project.documentId}`}
               className={`title is-5 is-family-code ${styles.button} ${selectedProjectId === project.documentId ? styles.active : ""}`}
-              onClick={() => onSelect(project)}
             >
               {project.name}
-            </button>
+            </Link>
+            <Link
+              to={`/projects/${project.documentId}/backlog`}
+              className={`${styles.backlogBtn} button is-link is-family-code`}
+            >
+              Backlog
+            </Link>
             <button
               className="button is-danger is-dark"
               type="button"
