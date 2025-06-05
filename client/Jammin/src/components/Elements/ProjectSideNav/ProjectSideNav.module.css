@@ -1,4 +1,3 @@
-
 .button {
   border: none;
   cursor: pointer;
@@ -10,4 +9,23 @@
 .active {
   background-color: rgb(66, 88, 255);
   color: white;
+}
+
+.form {
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.form input {
+  max-width: 10.2rem;
+}
+
+.li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.li button {
+  margin-bottom: 0.5rem;
 }
