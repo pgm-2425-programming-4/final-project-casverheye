@@ -2,8 +2,8 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
-  padding: 0.5rem 1rem;
   transition: background-color 0.2s ease;
+  margin-bottom: 0 !important;
 }
 
 .active {
@@ -22,14 +22,11 @@
 
 .li {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
-.li button {
-  margin-bottom: 0.5rem;
-}
-
-.ul {
-  max-width: 10rem;
+.backlogBtn {
+  padding: 0.2rem 1rem;
 }
