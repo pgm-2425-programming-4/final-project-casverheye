@@ -50,3 +50,20 @@
   display: flex;
   gap: 0.3rem;
 }
+
+.statusColumns {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.statusColumn {
+  flex: 1 1 220px;
+  border-radius: 8px;
+  border: 1px solid white;
+  padding: 1rem;
+  min-width: 220px;
+  box-sizing: border-box;
+  margin-right: 0.5rem;
+}
