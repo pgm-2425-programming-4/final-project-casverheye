@@ -19,7 +19,7 @@ const PaginatedBacklog = () => {
   const queryClient = useQueryClient();
 
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTIONS[4]);
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTIONS[3]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { mutate: deleteTaskMutate } = useMutation({
