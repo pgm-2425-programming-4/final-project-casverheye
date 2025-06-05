@@ -29,3 +29,7 @@
 .li button {
   margin-bottom: 0.5rem;
 }
+
+.ul {
+  max-width: 10rem;
+}

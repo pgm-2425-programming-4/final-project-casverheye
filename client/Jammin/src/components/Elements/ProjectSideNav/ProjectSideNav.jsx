@@ -48,7 +48,7 @@ const ProjectSideNav = ({ selectedProjectId, onSelect }) => {
 
   return (
     <nav>
-      <h3 className="title">Projects</h3>
+      <h3 className="title is-1">Projects</h3>
       <form onSubmit={handleAddProject} className={styles.form}>
         <input
           type="text"
@@ -66,7 +66,7 @@ const ProjectSideNav = ({ selectedProjectId, onSelect }) => {
           label={<FontAwesomeIcon icon={faPlus} />}
         />
       </form>
-      <ul>
+      <ul className={styles.ul}>
         {data?.data?.map((project) => (
           <li
             key={project.id} className={styles.li}

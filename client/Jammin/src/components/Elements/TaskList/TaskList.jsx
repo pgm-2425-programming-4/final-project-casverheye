@@ -12,7 +12,7 @@ const TaskList = ({ projectId, projectName }) => {
     enabled: !!projectId
   });
 
-  if (!projectId) return <div className="title pl-4">Select a project to see the tasks!</div>;
+  if (!projectId) return <div className="title is-1 pl-4">Select a project to see the tasks!</div>;
   if (isLoading) return <div>Loading tasks...</div>;
   if (isError) return <div>Error loading tasks.</div>;
 
