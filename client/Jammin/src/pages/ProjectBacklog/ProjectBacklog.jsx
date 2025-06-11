@@ -1,7 +1,7 @@
-import { useParams } from "@tanstack/react-router";
+import { useParams, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import fetchProjects from "../../api/fetchProjects";
-import BacklogList from "../../components/Elements/BacklogList";
+import PaginatedBacklog from "../PaginatedBacklog/PaginatedBacklog";
 
 const ProjectBacklog = () => {
   const { id } = useParams({ strict: false });
@@ -18,10 +18,15 @@ const ProjectBacklog = () => {
 
   return (
     <section>
-      <h2 className="title is-1">
-        {project ? `${project.name} Backlog` : "Project Backlog"}
-      </h2>
-      <BacklogList projectId={id} />
+      <div className="mb-4 is-flex is-justify-content-space-between is-align-items-center">
+        <h2 className="title is-1">
+          {project ? `${project.name} Backlog` : "Project Backlog"}
+        </h2>
+        <Link to={`/projects/${id}`} className="button is-link is-family-code">
+          ← Back to Project
+        </Link>
+      </div>
+      <PaginatedBacklog projectId={id} />
     </section>
   );
 };
