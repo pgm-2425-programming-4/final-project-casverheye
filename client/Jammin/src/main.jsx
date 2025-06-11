@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
@@ -11,12 +10,10 @@ const router = createRouter({ routeTree });
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <main className="container">
-        <RouterProvider router={router} />
-        <ToastContainer position="top-center"/>
-      </main>
-    </QueryClientProvider>
-  </StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <main className="container">
+      <RouterProvider router={router} />
+      <ToastContainer position="top-center" />
+    </main>
+  </QueryClientProvider>
 );

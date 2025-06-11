@@ -72,7 +72,7 @@ const ProjectSideNav = ({ selectedProjectId, onSelect }) => {
           <li key={project.id} className={styles.li}>
             <Link
               to={`/projects/${project.documentId}`}
-              className={`title is-5 is-family-code ${styles.button} ${selectedProjectId === project.documentId ? styles.active : ""}`}
+              className={`title is-5 is-family-code ${styles.button}`}
             >
               {project.name}
             </Link>

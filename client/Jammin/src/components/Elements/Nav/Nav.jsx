@@ -9,7 +9,6 @@ const Nav = () => {
       <ul className={styles.nav}>
         <li><Link to="/" className={`title ${styles.link}`}>Home</Link></li>
         <li><Link to="/about" className={`title ${styles.link}`}>About</Link></li>
-        <li><BacklogButton label={'Backlog'}/></li>
       </ul>
     </nav>
   );

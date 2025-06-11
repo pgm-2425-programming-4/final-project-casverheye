@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 
 const ProjectBoard = () => {
   const { id } = useParams({ strict: false });
+  console.log("ProjectBoard id param:", id);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["projects"],
@@ -26,7 +27,7 @@ const ProjectBoard = () => {
         {project && (
           <Link
             to={`/projects/${project.documentId}/backlog`}
-            className="button is-link"
+            className="button is-link is-family-code"
           >
             {project.name} Backlog
           </Link>
