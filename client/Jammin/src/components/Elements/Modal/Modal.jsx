@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Form from "../Form";
 
-const Modal = ({ isOpen, onClose, title }) => {
+const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, title }) => {
             onClick={onClose}
           />
         </div>
-        <Form />
+        {children}
       </div>
     </div>
   );
