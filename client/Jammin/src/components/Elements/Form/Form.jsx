@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import createTask from "../../../api/createTask";
+import updateTask from "../../../api/updateTask";
 import fetchStatuses from "../../../api/fetchStatuses";
 import styles from "./Form.module.css";
 
-const Form = ({ onSuccess, projectId, statusOptions }) => {
-  console.log("Form projectId:", projectId);
+const Form = ({ onSuccess, projectId, statusOptions, initialTask }) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["statuses"],
     queryFn: fetchStatuses,
@@ -16,13 +16,34 @@ const Form = ({ onSuccess, projectId, statusOptions }) => {
     title: "",
     description: "",
     taskStatus: "",
-    project: "",
+    project: projectId,
   });
+
+  useEffect(() => {
+    if (initialTask) {
+      setTask({
+        title: initialTask.title,
+        description: initialTask.description,
+        taskStatus: initialTask.taskStatus?.documentId || "",
+        project: projectId,
+      });
+    } else {
+      setTask({
+        title: "",
+        description: "",
+        taskStatus: "",
+        project: projectId,
+      });
+    }
+  }, [initialTask, projectId]);
 
   const queryClient = useQueryClient();
 
   const { mutate, isLoading: isMutating } = useMutation({
-    mutationFn: createTask,
+    mutationFn: (payload) =>
+      initialTask
+        ? updateTask(initialTask.documentId, payload)
+        : createTask(payload),
     onSuccess: () => {
       setTask({
         title: "",
@@ -36,10 +57,11 @@ const Form = ({ onSuccess, projectId, statusOptions }) => {
         queryClient.invalidateQueries({ queryKey: ["tasks", projectId] });
       }
 
-      toast.success("Task added successfully!");
-      if (onSuccess) onSuccess();
+      if (onSuccess) onSuccess(initialTask ? "update" : "create");
     },
-    onError: () => {},
+    onError: () => {
+      toast.error("Something went wrong.");
+    },
   });
 
   const handleChange = (e) => {
@@ -48,21 +70,18 @@ const Form = ({ onSuccess, projectId, statusOptions }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting with projectId:", projectId); // Debug
     const payload = {
       title: task.title,
       description: task.description,
       taskStatus: task.taskStatus,
       project: projectId,
     };
-    console.log("Payload:", payload); // Debug
     mutate(payload);
   };
 
   return (
     <form className={`is-family-code ${styles.form}`} onSubmit={handleSubmit}>
       <input type="hidden" name="project" value={projectId} />
-      <div>Debug: projectId = {projectId}</div>
       <div className="field">
         <label className="label" htmlFor="title">
           Title:
@@ -113,7 +132,7 @@ const Form = ({ onSuccess, projectId, statusOptions }) => {
                 Select status
               </option>
               {statusOptions?.map((status) => (
-                <option key={status.id} value={status.id}>
+                <option key={status.documentId} value={status.documentId}>
                   {status.name}
                 </option>
               ))}
@@ -128,7 +147,7 @@ const Form = ({ onSuccess, projectId, statusOptions }) => {
               type="submit"
               disabled={isMutating || isLoading}
             >
-              Create
+              {initialTask ? "Update" : "Create"}
             </button>
           </div>
         </div>

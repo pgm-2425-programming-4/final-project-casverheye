@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import styles from "./PaginatedBacklog.module.css";
 
-
 import fetchTasks from "../../api/fetchTasks";
 import fetchStatuses from "../../api/fetchStatuses";
 import deleteTask from "../../api/deleteTask";
@@ -16,23 +15,28 @@ import Button from "../../components/General/Button";
 import Form from "../../components/Elements/Form/Form";
 import Modal from "../../components/Elements/Modal";
 
-const PaginatedBacklog = ({projectId}) => {
-
+const PaginatedBacklog = ({ projectId }) => {
   const queryClient = useQueryClient();
 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(PAGE_SIZE_OPTIONS[3]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editTask, setEditTask] = useState(null);
 
   const { data: statusesData, isLoading: statusesLoading } = useQuery({
     queryKey: ["statuses"],
     queryFn: fetchStatuses,
   });
 
-  const backlogStatus = statusesData.data.find(
+  const allStatuses = statusesData?.data?.filter((s) =>
+    ["backlog", "todo", "progress", "review", "done"].includes(
+      s.name.toLowerCase()
+    )
+  ) || [];
+
+  const backlogStatus = allStatuses.find(
     (status) => status.name.toLowerCase() === "backlog"
   );
-  
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["backlog", projectId, page, pageSize],
@@ -55,9 +59,25 @@ const PaginatedBacklog = ({projectId}) => {
 
   const handleDelete = (task) => {
     deleteTaskMutate(task.documentId);
-  }
+  };
 
-  if (isLoading) return <p>Loading...</p>;
+  const handleEdit = (task) => {
+    setEditTask(task);
+    setIsModalOpen(true);
+  };
+
+  const handleEditSuccess = (type) => {
+    setIsModalOpen(false);
+    setEditTask(null);
+    queryClient.invalidateQueries({ queryKey: ["backlog"] });
+    if (type === "create") {
+      toast.success("Task created successfully!");
+    } else {
+      toast.success("Task updated successfully!");
+    }
+  };
+
+  if (isLoading || statusesLoading) return <p>Loading...</p>;
   if (isError) return <p>Error loading backlog.</p>;
 
   const tasks = data?.data || [];
@@ -70,17 +90,34 @@ const PaginatedBacklog = ({projectId}) => {
         <Button
           variant={"success"}
           label={<FontAwesomeIcon icon={faPlus} />}
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setEditTask(null);
+            setIsModalOpen(true);
+          }}
         />
         <Modal
           isOpen={isModalOpen}
-          title={"Add a task to your Backlog"}
-          onClose={() => setIsModalOpen(false)}
+          title={editTask ? "Edit Task" : "Add a task to your Backlog"}
+          onClose={() => {
+            setEditTask(null);
+            setIsModalOpen(false);
+          }}
         >
-          <Form projectId={projectId} onSuccess={() => setIsModalOpen(false)} statusOptions={[backlogStatus]}/>
+          <Form
+            projectId={projectId}
+            onSuccess={handleEditSuccess}
+            statusOptions={
+              editTask
+                ? allStatuses
+                : backlogStatus
+                ? [backlogStatus]
+                : []
+            }
+            initialTask={editTask}
+          />
         </Modal>
       </div>
-      <BacklogList tasks={tasks} onDelete={handleDelete} />
+      <BacklogList tasks={tasks} onDelete={handleDelete} onEdit={handleEdit} />
       <Pagination
         currentPage={pagination.page}
         pageCount={pagination.pageCount}

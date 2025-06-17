@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from './BacklogList.module.css'
 
-const BacklogList = ({ tasks, onDelete }) => {
+const BacklogList = ({ tasks, onDelete, onEdit }) => {
   return (
     <table className="table is-fullwidth">
       <thead>
@@ -20,8 +20,18 @@ const BacklogList = ({ tasks, onDelete }) => {
             <td className="is-family-code">{task.description}</td>
             <td className="is-family-code">{task.taskStatus?.name}</td>
             <td className={styles.actions}>
-              <button className="button is-warning is-dark"><FontAwesomeIcon icon={faPenToSquare} /></button>
-              <button className="button is-danger is-dark" onClick={() => onDelete(task)}><FontAwesomeIcon icon={faTrash} /></button>
+              <button
+                className="button is-warning is-dark"
+                onClick={() => onEdit && onEdit(task)}
+              >
+                <FontAwesomeIcon icon={faPenToSquare} />
+              </button>
+              <button
+                className="button is-danger is-dark"
+                onClick={() => onDelete(task)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
             </td>
           </tr>
         ))}
