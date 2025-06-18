@@ -6,7 +6,7 @@ import { Link } from "@tanstack/react-router";
 
 const ProjectBoard = () => {
   const { id } = useParams({ strict: false });
-  console.log("ProjectBoard id param:", id);
+  // console.log("ProjectBoard id param:", id);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["projects"],
